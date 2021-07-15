@@ -1,4 +1,4 @@
-FROM lts-alpine3.14
+FROM node:lts-alpine3.14
 RUN apk update --no-cache\
     && apk add fish alpine-sdk bash libstdc++ libc6-compat python3 --no-cache \
     && npm config set python python3 
