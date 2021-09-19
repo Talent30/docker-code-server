@@ -4,7 +4,7 @@ ARG USER=code
 ENV HOME /home/$USER
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
-        && apk add --no-cache sudo fish npm nodejs nano htop 
+        && apk add --no-cache sudo git fish npm nodejs nano htop 
 
 FROM base AS build
 RUN  apk add --no-cache --virtual .build-deps \
