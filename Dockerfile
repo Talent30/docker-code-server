@@ -12,9 +12,7 @@ RUN  adduser -D $USER \
 
 FROM base AS dependencies
 RUN  npm config set python python3 \
-        && npm i -g code-server --unsafe-perm \
-        && npm cache clean --force \
-        && apk del alpine-sdk bash python3 
+        && npm i -g code-server --unsafe-perm
 
 FROM dependencies AS build
 RUN npm i -g code-server --unsafe-perm 
