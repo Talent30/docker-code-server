@@ -1,17 +1,24 @@
 FROM alpine:latest AS base
 
 ARG USER=code
+
+ENV NODE_ENV=production
 ENV HOME /home/$USER
+
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
-        && apk add --no-cache sudo git fish npm nodejs nano htop 
+        && apk add --no-cache sudo git fish npm nodejs nano htop openssh
 
-FROM base AS build
+FROM base AS build-deps
 RUN  apk add --no-cache --virtual .build-deps \
-        alpine-sdk bash python3 libstdc++ libc6-compat \
-        && npm config set python python3 \
-        && npm i -g code-server --unsafe-perm \
-        && npm cache clean --force \
+        alpine-sdk bash python3 libstdc++ libc6-compat
+
+FROM build-deps AS build
+RUN  npm config set python python3 \
+        && npm i -g code-server --unsafe-perm
+
+FROM build AS clean
+RUN  npm cache clean --force \
         && apk del .build-deps
 
 FROM build as release
