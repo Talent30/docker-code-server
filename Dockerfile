@@ -29,4 +29,4 @@ RUN  adduser -D $USER \
 USER code
 
 EXPOSE 8080
-ENTRYPOINT ["code-server"]
+ENTRYPOINT ["NODE_ENV=production"", code-server"]
