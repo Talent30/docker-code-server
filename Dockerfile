@@ -2,7 +2,6 @@ FROM alpine:latest AS base
 
 ARG USER=code
 
-ENV NODE_ENV=production
 ENV HOME /home/$USER
 
 RUN  apk update --no-cache \
