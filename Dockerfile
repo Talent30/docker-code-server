@@ -1,4 +1,4 @@
-FROM alpine:latest AS base
+FROM node:14-alpine AS base
 
 ARG USER=code
 
@@ -6,7 +6,7 @@ ENV HOME /home/$USER
 
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
-        && apk add --no-cache sudo git fish npm nodejs nano htop openssh
+        && apk add --no-cache sudo git fish nano htop openssh
 
 FROM base AS build-deps
 RUN  apk add --no-cache --virtual .build-deps \
