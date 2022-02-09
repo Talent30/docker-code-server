@@ -1,4 +1,4 @@
-FROM node:14-alpine3.14 AS base
+FROM node:14-alpine3.15 AS base
 
 ARG USER=code
 
