@@ -14,10 +14,11 @@ RUN  apk add --no-cache --virtual .build-deps \
 
 FROM build-deps AS build
 RUN  npm config set python python3 \
-        && npm i -g code-server --unsafe-perm
+        && yarn global add code-server
 
 FROM build AS clean
 RUN  npm cache clean --force \
+        && yarn cache clean \
         && apk del .build-deps
 
 FROM build as release
