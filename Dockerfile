@@ -6,7 +6,7 @@ ENV HOME /home/$USER
 
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
-        && apk add --no-cache sudo git fish nano htop openssh
+        && apk add --no-cache git fish nano htop openssh openssh-keygen
 
 FROM base AS build-deps
 RUN  apk add --no-cache --virtual .build-deps \
@@ -21,12 +21,5 @@ RUN  npm cache clean --force \
         && yarn cache clean \
         && apk del .build-deps
 
-FROM build as release
-RUN  adduser -D $USER \
-        && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
-        && chmod 0440 /etc/sudoers.d/$USER
-
-USER code
-
-EXPOSE 8080
+EXPOSE 80
 CMD ["code-server"]
