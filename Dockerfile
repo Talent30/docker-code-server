@@ -1,9 +1,5 @@
 FROM node:14-alpine3.15 AS base
 
-ARG USER=code
-
-ENV HOME /home/$USER
-
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
         && apk add --no-cache git fish nano htop openssh openssh-keygen
