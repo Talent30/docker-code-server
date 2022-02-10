@@ -1,5 +1,7 @@
 FROM node:14-alpine3.15 AS base
 
+USER root
+
 RUN  apk update --no-cache \
         && apk upgrade --no-cache -a \
         && apk add --no-cache git fish nano htop openssh openssh-keygen
